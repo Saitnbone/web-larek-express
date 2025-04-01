@@ -1,4 +1,5 @@
 {
+  "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
   "env": {
     "es2021": true,
     "node": true
