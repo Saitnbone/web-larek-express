@@ -1,13 +1,13 @@
-import { Request, Response } from "express";
-import asyncHandler from "express-async-handler";
-import Product from "../models/product";
-import HttpStatus from "../constants";
+import { Request, Response } from 'express';
+import asyncHandler from 'express-async-handler';
+import Product from '../models/product';
+import HttpStatus from '../constants';
 
-const getProducts = asyncHandler(async (req: Request, res: Response) => {
+const getProducts = asyncHandler(async (_req: Request, res: Response) => {
   const products = await Product.find();
 
   if (products.length === 0) {
-    res.status(HttpStatus.NOT_FOUND).json({ message: "Продукты не найдены" });
+    res.status(HttpStatus.NOT_FOUND).json({ message: 'Продукты не найдены' });
   }
 
   res.status(HttpStatus.OK).json({
@@ -16,11 +16,11 @@ const getProducts = asyncHandler(async (req: Request, res: Response) => {
   });
 });
 
-const getProduct = asyncHandler(async (req: Request, res: Response) => {
-  const product = await Product.findById(req.params.id);
+const getProduct = asyncHandler(async (_req: Request, res: Response) => {
+  const product = await Product.findById(_req.params.id);
 
   if (!product) {
-    res.status(HttpStatus.NOT_FOUND).json({ message: "Продукт не найден" });
+    res.status(HttpStatus.NOT_FOUND).json({ message: 'Продукт не найден' });
   }
 
   res.status(HttpStatus.OK).json({
@@ -28,10 +28,12 @@ const getProduct = asyncHandler(async (req: Request, res: Response) => {
   });
 });
 
-const createProduct = asyncHandler(async (req: Request, res: Response) => {
-  const { description, image, title, category, price } = req.body;
+const createProduct = asyncHandler(async (_req: Request, res: Response) => {
+  const {
+    description, image, title, category, price,
+  } = _req.body;
 
-  const { id, ...imageData } = image;
+  const { _id, ...imageData } = image;
 
   const product = await Product.create({
     title,
@@ -44,11 +46,11 @@ const createProduct = asyncHandler(async (req: Request, res: Response) => {
   if (!product) {
     res
       .status(HttpStatus.BAD_REQUEST)
-      .json({ message: "Не удалось создать продукт" });
+      .json({ message: 'Не удалось создать продукт' });
   }
 
   res.status(HttpStatus.CREATE_OK).json({
-    message: "Продукт успешно создан",
+    message: 'Продукт успешно создан',
     product,
   });
 });

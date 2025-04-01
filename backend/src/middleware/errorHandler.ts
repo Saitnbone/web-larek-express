@@ -1,23 +1,23 @@
-import { Request, Response, NextFunction } from "express";
-import BadRequestError from "../errors/bad-request-error";
-import ConflictError from "../errors/conflict-error";
-import NotFoundError from "../errors/not-found-error";
+import { Request, Response, NextFunction } from 'express';
+import BadRequestError from '../errors/bad-request-error';
+import ConflictError from '../errors/conflict-error';
+import NotFoundError from '../errors/not-found-error';
 
 const errorHandler = (
   err: any,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
-  let statusCode = res.statusCode;
+  let { statusCode } = res;
 
   if (!statusCode || statusCode === 200) {
     statusCode = 500;
   }
 
-  let errorResponse = {
-    message: err.message || "Что-то пошло не так",
-    stack: process.env.NODE_ENV === "development" ? err.stack : undefined, // Показываем стек только в dev-режиме
+  const errorResponse = {
+    message: err.message || 'Что-то пошло не так',
+    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined, // Показываем стек только в dev-режиме
   };
 
   switch (statusCode) {

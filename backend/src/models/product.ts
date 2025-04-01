@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-import-module-exports
-import mongoose from "mongoose";
-import { IProduct } from "../types/types";
+import mongoose from 'mongoose';
+import { IProduct } from '../types/types';
 
 const productSchema = new mongoose.Schema<IProduct>({
   title: {
@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema<IProduct>({
     required: [true, 'Поле "title" должно быть заполнено'],
     minlength: [2, 'Минимальная длина поля "title" - 2'],
     maxlength: [30, 'Максимальная длина поля "title" - 30'],
-    unique: true
+    unique: true,
   },
   image: {
     fileName: {
@@ -35,4 +35,4 @@ const productSchema = new mongoose.Schema<IProduct>({
   },
 });
 
-export default mongoose.model<IProduct>("Product", productSchema);
+export default mongoose.model<IProduct>('Product', productSchema);
