@@ -17,7 +17,7 @@ const errorHandler = (
 
   const errorResponse = {
     message: err.message || 'Что-то пошло не так',
-    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined, // Показываем стек только в dev-режиме
+    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined,
   };
 
   switch (statusCode) {

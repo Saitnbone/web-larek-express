@@ -16,6 +16,16 @@ const ValidateProductBody = celebrate({
   }),
 });
 
+// Валидация для id
+const ValidateProductId = celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    id: Joi.string()
+      .length(24)
+      .regex(/^[0-9a-f]+$/)
+      .required(),
+  }),
+});
+
 // Валидация данных для создания заказа
 const ValidateOrdertBody = celebrate({
   [Segments.BODY]: Joi.object().keys({
@@ -28,4 +38,4 @@ const ValidateOrdertBody = celebrate({
   }),
 });
 
-export { ValidateProductBody, ValidateOrdertBody };
+export { ValidateProductBody, ValidateProductId, ValidateOrdertBody };
